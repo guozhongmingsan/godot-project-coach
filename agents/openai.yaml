@@ -1,0 +1,14 @@
+interface:
+  display_name: Godot Project Coach
+  short_description: Build Godot games through verified hands-on lessons
+  default_prompt: Use $godot-project-coach to guide the next verifiable unit of my
+    Godot project and assess my understanding before advancing.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true
