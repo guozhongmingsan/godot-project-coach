@@ -18,21 +18,31 @@ Name every required AutoLoad in L6, including its responsibility and consumers. 
 
 ## L5-L7 truth model
 
-- **L5 — Behavioral Truth:** State plain-language rules, exceptions, and boundaries without Godot-specific implementation details.
-- **L6 — Human-readable Representation of Implementation Truth:** Describe the selected language and framework structure in readable natural-language pseudocode, aligned closely enough with L7 to expose Nodes, files, ownership, calls, signals, state, errors, and control flow.
-- **L7 — Implementation Truth:** Provide the actual `.gd`, C++, `.tscn`, `.tres`, project settings, and build configuration.
+- **L5 — Work Breakdown & Execution Truth:** Define the current small, independently executable Work Unit. Record its stable ID, purpose, source L1-L4 artifacts, dependencies, in-scope work, out-of-scope work, Definition of Done, expected artifacts, priority, and status. L5 is the project's Work Progress Truth.
+- **L6 — Human-readable Representation of Implementation Truth:** After L7 is implemented or modified, describe what the implementation actually does using meaningful semantic blocks. Include actual behavior, control flow, state changes, Node and module interactions, important dependencies, Godot framework usage, side effects, failure paths, implementation decisions, potential risks, and any decisions made by L7 that were not defined in L1-L4.
+- **L7 — Implementation Truth:** Provide the executable `.gd`, C++, `.tscn`, `.tres`, tests, project settings, and build configuration that determine actual runtime behavior.
 
-L6 may be produced before L7 or reconstructed after a first L7 pass. Judge it by fidelity, not order. Never create L6 by replacing code keywords with prose; a useful L6 explains why control and data cross each boundary.
+For a code-bearing unit, use this primary order:
+
+```text
+L5 Work Unit → L7 implementation → verification → L6 Human Review Model
+```
+
+L5 is not behavioral pseudocode. Product behavior and acceptance boundaries belong primarily to L2; module responsibilities belong to L3; interfaces, data, state, and error contracts belong to L4.
+
+Formal L6 must be generated or updated from the actual final L7. Any implementation planning written before coding belongs to L4 detailed design or L5 execution notes, not L6.
+
+Never create L6 by translating individual code keywords into prose. Group the implementation into meaningful behavior, state, interaction, error-handling, and framework-integration blocks that help a human review what the code actually does.
 
 ## Unit deliverables
 
 For a code-bearing unit, present only the layers the unit needs:
 
-1. L5 rules and edge cases.
+1. The current L5 Work Unit, including scope, exclusions, dependencies, and Definition of Done.
 2. The minimal Scene tree and file responsibility changes.
 3. L7 implementation and exact configuration.
-4. L6 that faithfully represents the final implementation structure.
-5. Runtime or test acceptance evidence.
+4. Runtime or test acceptance evidence.
+5. L6 that represents the verified final implementation and identifies important risks or undefined decisions.
 
 Do not invent a `.tres`, AutoLoad, abstraction, signal bus, component, or service before the current behavior requires it.
 
